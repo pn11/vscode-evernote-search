@@ -4,7 +4,7 @@ This is an example for running a Python script inside a VSCode extension using t
 
 ## Features
 
-Open command palette, then run `Hello World`.
+Open command palette, then run `Evernote Search`.
 
 ![demo animation](image/demo.gif)
 

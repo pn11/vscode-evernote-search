@@ -9,46 +9,26 @@ export function activate(context: vscode.ExtensionContext) {
 
 	// Use the console to output diagnostic information (console.log) and errors (console.error)
 	// This line of code will only be executed once when your extension is activated
-	console.log('Congratulations, your extension "vscode-extension-with-python" is now active!');
+	console.log('Congratulations, your extension "evernote-search" is now active!');
 
 	// The command has been defined in the package.json file
 	// Now provide the implementation of the command with registerCommand
 	// The commandId parameter must match the command field in package.json
-	let disposable = vscode.commands.registerCommand('vscode-extension-with-python.helloWorld', () => {
+	let disposable = vscode.commands.registerCommand('evernote-search.search', () => {
 		// The code you place here will be executed every time your command is executed
 
 		// List all extensions (yours comes last)
 		// vscode.extensions.all.filter( e => {console.log(e)});
 
 		// get path to extension
-		console.log(vscode.extensions.getExtension('undefined_publisher.vscode-extension-with-python')?.extensionPath);
-		let ext_path = vscode.extensions.getExtension('undefined_publisher.vscode-extension-with-python')?.extensionPath;
+		console.log(vscode.extensions.getExtension('undefined_publisher.evernote-search')?.extensionPath);
+		let ext_path = vscode.extensions.getExtension('undefined_publisher.evernote-search')?.extensionPath;
 
 		// get pythonpath from VSCode config
 		let pythonpath = vscode.workspace.getConfiguration('python').get<string>('pythonPath');
 		console.log(pythonpath);
 
-		let options1: Options = {
-			mode: 'text', // response in text format
-			pythonPath: pythonpath,
-			pythonOptions: ['-u'], // get print results in real-time
-		};
-		PythonShell.runString(
-			'\n\
-import sys\n\
-print(sys.executable)\n\
-print(sys.version)\n\
-import os\n\
-print(os.getcwd())', options1, function (err, res) {
-			console.log('Test executing a python string');
-			if (err) {
-				console.log(err);
-				throw err;
-			}
-			res?.filter(r => {console.log(r)});
-		});
-
-		let options2: Options = {
+		let options: Options = {
 			mode: 'text',
 			pythonPath: pythonpath,
 			pythonOptions: ['-u'], // get print results in real-time
@@ -56,7 +36,7 @@ print(os.getcwd())', options1, function (err, res) {
 			args: ['Hello world from Python']
 		};
 
-		PythonShell.run('python/hello.py', options2, function (err, res) {
+		PythonShell.run('python/hello.py', options, function (err, res) {
 			console.log('Test executing a python script');
 			if (err) {
 				console.log(err);
@@ -64,8 +44,8 @@ print(os.getcwd())', options1, function (err, res) {
 			}
 			const res_str: string = (res || [''])[0];
 			console.log(res_str);
-			// Display a message box to the user
-			vscode.window.showInformationMessage(res_str);
+			const panel = vscode.window.createWebviewPanel('searchResult', 'Evernote Search Result', vscode.ViewColumn.One);
+			panel.webview.html = res_str;
 		});
 	});
 

@@ -1,7 +1,7 @@
 {
-	"name": "vscode-extension-with-python",
-	"displayName": "vscode-extension-with-python",
-	"description": "A VSCode extension example with Python",
+	"name": "evernote-search",
+	"displayName": "evernote-search",
+	"description": "A VSCode extension for searching notebooks in Evernote",
 	"version": "0.0.1",
 	"engines": {
 		"vscode": "^1.46.0"
@@ -10,14 +10,14 @@
 		"Other"
 	],
 	"activationEvents": [
-		"onCommand:vscode-extension-with-python.helloWorld"
+		"onCommand:evernote-search.search"
 	],
 	"main": "./out/extension.js",
 	"contributes": {
 		"commands": [
 			{
-				"command": "vscode-extension-with-python.helloWorld",
-				"title": "Hello World"
+				"command": "evernote-search.search",
+				"title": "Evernote Search"
 			}
 		]
 	},
