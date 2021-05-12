@@ -1,48 +1,32 @@
-// The module 'vscode' contains the VS Code extensibility API
-// Import the module and reference it with the alias vscode in your code below
 import * as vscode from 'vscode';
 import { Options, PythonShell } from 'python-shell';
 
 // this method is called when your extension is activated
 // your extension is activated the very first time the command is executed
 export function activate(context: vscode.ExtensionContext) {
-
-	// Use the console to output diagnostic information (console.log) and errors (console.error)
-	// This line of code will only be executed once when your extension is activated
-	console.log('Congratulations, your extension "evernote-search" is now active!');
-
-	// The command has been defined in the package.json file
-	// Now provide the implementation of the command with registerCommand
-	// The commandId parameter must match the command field in package.json
 	let disposable = vscode.commands.registerCommand('evernote-search.search', () => {
-		// The code you place here will be executed every time your command is executed
-
-		// List all extensions (yours comes last)
-		// vscode.extensions.all.filter( e => {console.log(e)});
-
-		// get path to extension
-		console.log(vscode.extensions.getExtension('undefined_publisher.evernote-search')?.extensionPath);
+		// get Extension Path
 		let ext_path = vscode.extensions.getExtension('undefined_publisher.evernote-search')?.extensionPath;
-
 		// get pythonpath from VSCode config
 		let pythonpath = vscode.workspace.getConfiguration('python').get<string>('pythonPath');
-		console.log(pythonpath);
+		console.log("Used Python Env:", pythonpath);
 
 		let options: Options = {
 			mode: 'text',
 			pythonPath: pythonpath,
 			pythonOptions: ['-u'], // get print results in real-time
 			scriptPath: ext_path,
-			args: ['Hello world from Python']
+			args: ['テスト']
 		};
 
-		PythonShell.run('python/hello.py', options, function (err, res) {
+		PythonShell.run('python/search.py', options, function (err, res) {
 			console.log('Test executing a python script');
 			if (err) {
 				console.log(err);
+				vscode.window.showErrorMessage((res || ['']).join('\n'));
 				throw err;
 			}
-			const res_str: string = (res || [''])[0];
+			const res_str: string = (res || ['']).join('\n');
 			console.log(res_str);
 			const panel = vscode.window.createWebviewPanel('searchResult', 'Evernote Search Result', vscode.ViewColumn.One);
 			panel.webview.html = res_str;
