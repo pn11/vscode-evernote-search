@@ -1,5 +1,6 @@
 {
 	"name": "evernote-search",
+	"publisher": "pn11",
 	"displayName": "evernote-search",
 	"description": "A VSCode extension for searching notebooks in Evernote",
 	"version": "0.0.1",
@@ -44,5 +45,13 @@
 	},
 	"dependencies": {
 		"python-shell": "^3.0.0"
+	},
+	"license": "SEE LICENSE IN LICENSE.txt",
+    "bugs": {
+		"url": "https://github.com/pn11/vscode-evernote-search/issues"
+	},
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/pn11/vscode-evernote-search.git"
 	}
 }
