@@ -1,4 +1,5 @@
 import * as vscode from 'vscode';
+import * as fs from "fs";
 import { Options, PythonShell } from 'python-shell';
 
 export function activate(context: vscode.ExtensionContext) {
@@ -28,6 +29,13 @@ export function activate(context: vscode.ExtensionContext) {
 			vscode.window.showErrorMessage("Python environment not set.");
 			return;
 		}
+		if (fs.existsSync(pythonpath)) {
+		} else {
+			log.appendLine("Error: Python environment not found.");
+			log.show();
+			vscode.window.showErrorMessage("Error: Python environment not found.");
+			return;
+		}
 		
 		let promptOptions = {
 		    prompt: 'Evernote search query',
@@ -37,7 +45,7 @@ export function activate(context: vscode.ExtensionContext) {
 		};
 		vscode.window.showInputBox(promptOptions).then(val => {
 		    if (val != undefined) {
-			  search(val, pythonpath, ext_path, log);
+			  search(val, (pythonpath || ''), (ext_path || ''), log);
 		    }
 			else {
 				log.appendLine('Unexpected error when calling Python.');
@@ -51,7 +59,7 @@ export function activate(context: vscode.ExtensionContext) {
 }
 
 // Request to Evernote using Python API
-function search(search_query: string, pythonpath: string | undefined, ext_path: string | undefined, log: vscode.OutputChannel) {
+export function search(search_query: string, pythonpath: string, ext_path: string, log: vscode.OutputChannel) {
 	let options: Options = {
 		mode: 'text',
 		pythonPath: pythonpath,
@@ -61,6 +69,8 @@ function search(search_query: string, pythonpath: string | undefined, ext_path: 
 	};
 	PythonShell.run('python/search.py', options, function (err, res) {
 		if (err) {
+			log.appendLine((err.message));
+			log.appendLine((err.traceback.toString()));
 			log.appendLine((res || ['']).join('\n'));
 			log.show();
 			vscode.window.showErrorMessage((res || ['']).join('\n'));
