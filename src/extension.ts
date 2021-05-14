@@ -29,6 +29,7 @@ export function activate(context: vscode.ExtensionContext) {
 			vscode.window.showErrorMessage("Python environment not set.");
 			return;
 		}
+		/*
 		if (fs.existsSync(pythonpath)) {
 		} else {
 			log.appendLine("Error: Python environment not found.");
@@ -36,6 +37,7 @@ export function activate(context: vscode.ExtensionContext) {
 			vscode.window.showErrorMessage("Error: Python environment not found.");
 			return;
 		}
+		*/
 		
 		let promptOptions = {
 		    prompt: 'Evernote search query',

@@ -1,6 +1,6 @@
-# vscode-extension-with-python
+# evernote-search VSCode Exetension
 
-This is an example for running a Python script inside a VSCode extension using the Node.js package [python-shell](https://www.npmjs.com/package/python-shell).
+This extension enables you to search notes in Evernote.
 
 ## Features
 
@@ -10,7 +10,21 @@ Open command palette, then run `Evernote Search`.
 
 ## Requirements
 
-This extension needs Python installed.
+First, you need Python3 and modules below must be installed.
+
+```sh
+pip install evernote3 oauth2
+```
+
+Second, you need Evernote Developer token. You can get it from <https://sandbox.evernote.com/api/DeveloperToken.action>.  
+Developer token has to be saved like
+
+```ini
+[settings]
+EVERNOTE_TOKEN = YOUR_DEV_TOKEN
+```
+
+in `$HOME/.evernote-search.cfg`.
 
 ## Extension Settings
 
@@ -21,5 +35,7 @@ Currently, no settings are available.
 ..
 
 ## Release Notes
+
+See [CHANGELOG.md](CHANGELOG.md)
 
 ..

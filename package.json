@@ -46,6 +46,9 @@
 	"dependencies": {
 		"python-shell": "^3.0.0"
 	},
+	"extensionDependencies": [
+		"ms-python.python"
+	],
 	"license": "SEE LICENSE IN LICENSE.txt",
 	"bugs": {
 		"url": "https://github.com/pn11/vscode-evernote-search/issues"
