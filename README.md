@@ -10,13 +10,7 @@ Open command palette, then run `Evernote Search`.
 
 ## Requirements
 
-First, you need Python3 and modules below must be installed.
-
-```sh
-pip install evernote3 oauth2
-```
-
-Second, you need Evernote Developer token. You can get it from <https://sandbox.evernote.com/api/DeveloperToken.action>.  
+You need Evernote Developer token. You can get it from <https://sandbox.evernote.com/api/DeveloperToken.action>.  
 Developer token has to be saved like
 
 ```ini
