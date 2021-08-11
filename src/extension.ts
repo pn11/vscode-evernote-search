@@ -84,7 +84,7 @@ function request_search(search_query: string, log: vscode.OutputChannel) {
 }
 
 function make_link(user: evernote.Types.User, note: any) {
-	return 'https://www.evernote.com/shard/' + user.shardId + '/nl/' + user.id + '/ ' + note.guid
+	return 'https://www.evernote.com/shard/' + user.shardId + '/nl/' + user.id + '/' + note.guid
 }
 
 
